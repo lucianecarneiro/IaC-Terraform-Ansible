@@ -16,11 +16,14 @@ resource "aws_instance" "app_server" {
     ami = "ami-053b0d53c279acc90"
     instance_type = "t2.micro"
     key_name = "iac-alura"
+    # user_data = <<-EOF
+    #             #!/bin/bash
+    #             cd /home/ubuntu
+    #             echo "<h1>Criado pelo Terraform!<h1>" > index.html
+    #             nohup busybox httpd -f -p 8080 &
+    #             EOF
+    user_data_replace_on_change = true
     tags = {
-        Name = "PrimeiraInstancia"
+        Name = "Teste aws"
     }
 }
-
-# Note: You didn't use the -out option to save this plan, 
-# so Terraform can't guarantee to take exactly these actions 
-# if you run "terraform apply" now.
